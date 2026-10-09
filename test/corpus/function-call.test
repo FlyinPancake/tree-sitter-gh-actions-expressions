@@ -153,3 +153,22 @@ if: ${{ fromJSON(inputs.list)[0].name == 'x' }}
     (string
       (string_content))))
 
+==========================
+operators in arguments
+==========================
+if: fromJSON(vars.timeout || '20')
+---
+(source
+  (expression
+    (function_call
+      function: (identifier)
+      arguments: (arguments
+        (context
+          (identifier)
+          (property
+            (property_deref)
+            (identifier)))
+        (operator
+          (or))
+        (string
+          (string_content))))))

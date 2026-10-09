@@ -99,7 +99,13 @@ module.exports = grammar({
         field("arguments", optional($.arguments)),
         ")"
       ),
-    arguments: ($) => seq($._evaluation, repeat(seq(",", $._evaluation))),
+    arguments: ($) => seq($._argument, repeat(seq(",", $._argument))),
+    _argument: ($) =>
+      seq(
+        optional($.not),
+        $._evaluation,
+        repeat(seq($.operator, optional($.not), $._evaluation))
+      ),
     _format_function: ($) =>
       seq(
         field("function", alias("format", $.identifier)),
@@ -108,7 +114,7 @@ module.exports = grammar({
         ")"
       ),
     _format_arguments: ($) =>
-      seq($.format_string, repeat(seq(",", $._evaluation))),
+      seq($.format_string, repeat(seq(",", $._argument))),
 
     not: () => "!",
     operator: ($) => choice($.lt, $.le, $.gt, $.ge, $.eq, $.ne, $.and, $.or),
