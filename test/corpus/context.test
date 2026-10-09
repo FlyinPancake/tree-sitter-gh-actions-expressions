@@ -98,3 +98,32 @@ if: job.services.postgres.ports[5432]
       (property
         (index
           (number))))))
+
+================================
+single character identifiers
+================================
+if: needs.a.outputs.b
+---
+(source
+  (expression
+    (context
+      (identifier)
+      (property
+        (property_deref)
+        (identifier))
+      (property
+        (property_deref)
+        (identifier))
+      (property
+        (property_deref)
+        (identifier)))))
+
+=============================================
+single character identifier (delimited)
+=============================================
+if: ${{ x }}
+---
+(source
+  (delimited_expression
+    (context
+      (identifier))))

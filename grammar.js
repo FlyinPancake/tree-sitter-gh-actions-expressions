@@ -78,7 +78,7 @@ module.exports = grammar({
     format_index: ($) => $._int,
 
     asterisk: () => "*",
-    identifier: () => /[_a-zA-Z][-_a-zA-Z0-9]+/,
+    identifier: () => /[_a-zA-Z][-_a-zA-Z0-9]*/,
     property_deref: ($) => $._dot,
 
     context: ($) => seq($.identifier, repeat($.property)),
