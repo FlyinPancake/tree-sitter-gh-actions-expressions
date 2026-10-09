@@ -135,8 +135,20 @@
           "name": "context"
         },
         {
-          "type": "SYMBOL",
-          "name": "function_call"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "function_call"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "property"
+              }
+            }
+          ]
         },
         {
           "type": "SYMBOL",

@@ -24,7 +24,12 @@ module.exports = grammar({
     _ignored_bash: () => token(choice(/[^$]/, /\$[^{]/, /\$\{[^{]/)),
 
     _evaluation: ($) =>
-      choice($._literal, $.context, $.function_call, $.logical_group),
+      choice(
+        $._literal,
+        $.context,
+        seq($.function_call, repeat($.property)),
+        $.logical_group
+      ),
 
     expression: ($) =>
       seq(

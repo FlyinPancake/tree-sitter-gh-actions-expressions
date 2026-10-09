@@ -101,3 +101,55 @@ if: format('{{Hello {0} {1} {2}!}}', 'Mona', 'the', 'Octocat')
           (string_content))
         (string
           (string_content))))))
+
+=========================
+property of call result
+=========================
+if: fromJSON(steps.meta.outputs.json).tags
+---
+(source
+  (expression
+    (function_call
+      function: (identifier)
+      arguments: (arguments
+        (context
+          (identifier)
+          (property
+            (property_deref)
+            (identifier))
+          (property
+            (property_deref)
+            (identifier))
+          (property
+            (property_deref)
+            (identifier)))))
+    (property
+      (property_deref)
+      (identifier))))
+
+=====================================
+index of call result (delimited)
+=====================================
+if: ${{ fromJSON(inputs.list)[0].name == 'x' }}
+---
+(source
+  (delimited_expression
+    (function_call
+      function: (identifier)
+      arguments: (arguments
+        (context
+          (identifier)
+          (property
+            (property_deref)
+            (identifier)))))
+    (property
+      (index
+        (number)))
+    (property
+      (property_deref)
+      (identifier))
+    (operator
+      (eq))
+    (string
+      (string_content))))
+
